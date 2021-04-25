@@ -21,12 +21,12 @@ export class PorPaisComponent  {
   // Consumir el servicio
   constructor(private paisService: PaisService) { }
 
-  buscar(): void {
+  buscar( termino:string ): void {
+    this.termino = termino;
     this.hayError = false;
     this.paisService.buscarPais(this.termino)
     .subscribe( (paises) => { // Respuesta correcta
         this.paises = paises;
-       // console.log( paises );
     }, (err) => { // Respuesta error
       this.hayError = true;
       this.paises = [];
