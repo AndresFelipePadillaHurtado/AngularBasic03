@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { PaisService } from '../../services/pais.service';
+import { Country } from '../../interfaces/pais.interfaces';
 
 @Component({
   selector: 'app-ver-pais',
@@ -10,6 +11,8 @@ import { PaisService } from '../../services/pais.service';
   ]
 })
 export class VerPaisComponent implements OnInit {
+
+  pais!: Country; // ! indicarle que pais puede ser nulo
 
   //constructor Se ejecuta antes del inicializar el componenete
   constructor(
@@ -23,11 +26,10 @@ export class VerPaisComponent implements OnInit {
     // Uso del operador switcMap, este recibe un Observable y retorna otro Observable
     this.activatedRoute.params
     .pipe(
-      switchMap( (params) => this.paisService.getPaisPorAlpha(params.id) )
+      switchMap( (params) => this.paisService.getPaisPorAlpha(params.id) ),
+      tap( console.log ) // El operador tap sirve para poner en resultado de la consola
     )
-    .subscribe( resp => {
-
-    });
+    .subscribe( pais => this.pais = pais );
 
     // this.activatedRoute.params
     // .subscribe( params =>{ // Los parametro de las rutas
