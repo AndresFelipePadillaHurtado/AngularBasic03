@@ -21,7 +21,7 @@ export class PaisService {
 
   buscarPais(termino:string): Observable<Country[]> {
     const url = `${ this.apiUrl}/name/${termino}`;
-    console.log(url);
+    // console.log(url);
     return this.http.get<Country[]>(url, {params: this.HttpParams });
   }
 

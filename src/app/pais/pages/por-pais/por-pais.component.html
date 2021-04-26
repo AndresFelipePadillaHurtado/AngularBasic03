@@ -10,6 +10,22 @@
   </div>
 </div>
 
+<ul class="list-group">
+  <li  *ngFor="let pais of paisesSugeridos"
+       class="list-group-item list-group item-action">
+       <a [routerLink] ="['/pais', pais.alpha2Code]" class="nav-link">
+        <img [src]="pais.flag" width="20px" style="margin-right: 5px;">
+        {{pais.name}}
+      </a>
+  </li>
+  <li *ngIf="mostrarTermino" (click)="buscar(termino)"
+   class="list-group-item list-group item-action">
+    <a  class="nav-link" >
+      Buscar por termino "{{termino}}"
+    </a>
+  </li>
+</ul>
+
 <hr>
 
 <div *ngIf="hayError" class="alert alert-danger">
